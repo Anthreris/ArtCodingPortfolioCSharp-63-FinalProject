@@ -18,10 +18,10 @@ public class HomeController : Controller
         return View();
     }
 
-    public IActionResult Art()
-    {
-        return View();
-    }
+    // public IActionResult Art()
+    // {
+    //     return View();
+    // }
 
     public IActionResult Code()
     {

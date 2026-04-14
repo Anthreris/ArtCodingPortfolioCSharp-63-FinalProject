@@ -94,3 +94,4 @@ C:\Users\Garrett Chitwood\Desktop\repos\ArtAndCodingPortfolio\ArtAndCodingPortfo
 C:\Users\Garrett Chitwood\Desktop\repos\ArtAndCodingPortfolio\ArtAndCodingPortfolio\obj\Debug\net9.0\ArtAndCodingPortfolio.pdb
 C:\Users\Garrett Chitwood\Desktop\repos\ArtAndCodingPortfolio\ArtAndCodingPortfolio\obj\Debug\net9.0\ArtAndCodingPortfolio.genruntimeconfig.cache
 C:\Users\Garrett Chitwood\Desktop\repos\ArtAndCodingPortfolio\ArtAndCodingPortfolio\obj\Debug\net9.0\ref\ArtAndCodingPortfolio.dll
+C:\Users\Garrett Chitwood\Desktop\repos\ArtAndCodingPortfolio\ArtAndCodingPortfolio\obj\Debug\net9.0\ArtAndCodingPortfolio.sourcelink.json
