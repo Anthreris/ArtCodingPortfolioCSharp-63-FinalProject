@@ -16,22 +16,22 @@ public class ArtRepository : IArtRepository
         
     public IEnumerable<ArtPieceModel> GetAllArtPieces()
     {
-        return _connection.Query<ArtPieceModel>("SELECT * FROM ARTPIECE");
+        return _connection.Query<ArtPieceModel>("SELECT * FROM ARTPROJECTS");
     }
 
     public ArtPieceModel? GetArtPiece(int id)
     {
-        return _connection.QuerySingle<ArtPieceModel>("SELECT * FROM ARTPIECE WHERE ARTPIECEID = @id", new { id = id });
+        return _connection.QuerySingle<ArtPieceModel>("SELECT * FROM ARTPROJECTS WHERE ARTPIECEID = @id", new { id = id });
     }
     
     public void UpdateArtPiece(ArtPieceModel artPieceToUpdate)
     {
-        _connection.Execute("UPDATE ARTPIECE SET Title = @title, Description = @description, ImagePath = @imagepath, SortOrder = @sortorder");
+        _connection.Execute("UPDATE ARTPROJECTS SET Title = @title, Description = @description, ImagePath = @imagepath, SortOrder = @sortorder");
     }
     
     public void InsertArtPiece(ArtPieceModel artPieceToInsert)
     {
-        _connection.Execute("INSERT INTO ARTPIECE (TITLE, DESCRIPTION, IMAGEPATH, DATEADDED, SORTORDER, ARTPIECEID)  VALUES (@title, @description, @imagepath, @dateadded, @sortorder, @id)");
+        _connection.Execute("INSERT INTO ARTPROJECTS (TITLE, DESCRIPTION, IMAGEPATH, DATEADDED, SORTORDER, ARTPIECEID)  VALUES (@title, @description, @imagepath, @dateadded, @sortorder, @id)");
     } //DATEADDED or CURRENT_DATE ?
 
     // public void UpdateTitle(ArtPieceModel artPieceToUpdate)
