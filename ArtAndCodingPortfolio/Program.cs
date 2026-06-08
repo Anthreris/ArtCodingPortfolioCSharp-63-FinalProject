@@ -10,16 +10,17 @@ builder.Services.AddControllersWithViews();
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
                        ?? throw new InvalidOperationException("Connection string not found");
-//builder.Services.AddScoped<IDbConnection>(_ =>
+
 builder.Services.AddDbContext<PortfolioDbContext>(options =>
 {
-    var conn = new MySqlConnection(connectionString);
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
-    conn.Open();
-    //return conn;
 });
-    //options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
-//builder.Services.AddTransient<ICodeRepository, CodeRepository>();
+
+builder.Services.AddScoped<System.Data.IDbConnection>(_ =>
+    new MySqlConnection(connectionString));
+
+builder.Services.AddTransient<ICodeRepository, CodeRepository>();
+builder.Services.AddTransient<IArtRepository, ArtRepository>();
 
 var app = builder.Build();
 
