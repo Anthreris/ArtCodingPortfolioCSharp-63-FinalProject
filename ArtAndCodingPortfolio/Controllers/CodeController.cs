@@ -47,8 +47,8 @@ public class CodeController : Controller
 
     // public IActionResult InsertCodeProject()
     // {
-    //     var cod = _repo.InsertCodeProject();
-    //     return View(cod);
+    //     var code = _repo.InsertCodeProject();
+    //     return View(code);
     // }
 
     public IActionResult DeleteCodeProject(CodeProjectModel code)
