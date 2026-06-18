@@ -18,7 +18,7 @@ public class ArtController : Controller
         return View(art);
     }
 
-    public IActionResult ViewArtPiece(int id)
+    public IActionResult View(int id)
     {
         var art = _repo.GetArtPiece(id);
         if (art == null)
@@ -30,7 +30,7 @@ public class ArtController : Controller
     
     public IActionResult UpdateArtPiece(int id)
     {
-        ArtPieceModel art = _repo.GetArtPiece(id);
+        ArtPiece art = _repo.GetArtPiece(id);
         if (art == null)
         {
             return View("ArtPieceNotFound");
@@ -38,19 +38,25 @@ public class ArtController : Controller
         return View(art);
     }
     
-    public IActionResult UpdateArtPieceToDatabase(ArtPieceModel artPieceToUpdate)
+    public IActionResult UpdateArtPieceToDatabase(ArtPiece artPieceToUpdate)
     {
         _repo.UpdateArtPiece(artPieceToUpdate);
         return RedirectToAction("ViewArt", new { id = artPieceToUpdate.ArtPieceID });
     }
     
-    // public IActionResult InsertArtPiece()
-    // {
-    //     var art = _repo.InsertArtPiece();
-    //     return View(art);
-    // }
+    public IActionResult InsertArtPiece(ArtPiece artPieceToInsert)
+    {
+       _repo.InsertArtPiece(artPieceToInsert);
+       return RedirectToAction("List");
+    }
+
+    public IActionResult List()
+    {
+        var items = _repo.GetAllArtPieces();
+        return View(items);
+    }
     
-    public IActionResult DeleteArtPiece(ArtPieceModel art)
+    public IActionResult DeleteArtPiece(ArtPiece art)
     {
         _repo.DeleteArtPiece(art);
         return RedirectToAction("Index");

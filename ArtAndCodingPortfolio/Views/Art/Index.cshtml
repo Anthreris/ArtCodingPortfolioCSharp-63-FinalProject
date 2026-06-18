@@ -1,6 +1,26 @@
+@model IEnumerable<ArtPiece>
+
 @{
     ViewData["Title"] = "Art";
+    Layout = "_Layout";
 }
-<h1>@ViewData["Title"]</h1>
+<h2>@ViewData["Title"]</h2>
 
-<p>Imagine Art here.</p>
+<table class="table">
+    <tr>
+        <th>Image</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Date Added</th>
+    </tr>
+    
+    @foreach (var art in Model)
+    {
+        <tr>
+            <td><img src=@art.ImagePath height="325px" width="325px" alt=""></td>
+            <td>@art.Title</td>
+            <td>@art.Description</td>
+            <td>@art.DateAdded</td>
+        </tr>
+    }
+</table>

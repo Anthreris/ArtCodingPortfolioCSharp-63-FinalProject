@@ -14,25 +14,26 @@ public class ArtRepository : IArtRepository
         _connection = connection;
     }
         
-    public IEnumerable<ArtPieceModel> GetAllArtPieces()
+    public IEnumerable<ArtPiece> GetAllArtPieces()
     {
-        return _connection.Query<ArtPieceModel>("SELECT * FROM ARTPROJECTS");
+        return _connection.Query<ArtPiece>("SELECT * FROM ARTPROJECTS ORDER BY SortOrder");
     }
 
-    public ArtPieceModel? GetArtPiece(int id)
+    public ArtPiece? GetArtPiece(int id)
     {
-        return _connection.QuerySingle<ArtPieceModel>("SELECT * FROM ARTPROJECTS WHERE ARTPIECEID = @id", new { id = id });
+        return _connection.QuerySingle<ArtPiece>("SELECT * FROM ARTPROJECTS WHERE ARTPIECEID = @id", new { id = id });
     }
     
-    public void UpdateArtPiece(ArtPieceModel artPieceToUpdate)
+    public void UpdateArtPiece(ArtPiece artPieceToUpdate)
     {
         _connection.Execute("UPDATE ARTPROJECTS SET Title = @title, Description = @description, ImagePath = @imagepath, SortOrder = @sortorder");
     }
     
-    public void InsertArtPiece(ArtPieceModel artPieceToInsert)
+    public void InsertArtPiece(ArtPiece artPieceToInsert)
     {
         _connection.Execute("INSERT INTO ARTPROJECTS (TITLE, DESCRIPTION, IMAGEPATH, DATEADDED, SORTORDER, ARTPIECEID)  VALUES (@title, @description, @imagepath, @dateadded, @sortorder, @id)");
-    } //DATEADDED or CURRENT_DATE ?
+    }
+    //DATEADDED or CURRENT_DATE ?
 
     // public void UpdateTitle(ArtPieceModel artPieceToUpdate)
     // {
@@ -49,7 +50,7 @@ public class ArtRepository : IArtRepository
     //     _connection.Execute("UPDATE ARTPIECE SET SORTORDER = @sortorder");
     // }
 
-    public void DeleteArtPiece(ArtPieceModel artPieceToDelete)
+    public void DeleteArtPiece(ArtPiece artPieceToDelete)
     {
         _connection.Execute("DELETE FROM ARTPROJECTS WHERE ARTPIECEID = @id;", new { id = artPieceToDelete.ArtPieceID });
     }

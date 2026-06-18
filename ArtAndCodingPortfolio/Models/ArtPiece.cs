@@ -1,6 +1,6 @@
 namespace ArtAndCodingPortfolio.Models;
 
-public class ArtPieceModel
+public class ArtPiece
 {
     public int ArtPieceID { get; set; }
     public required string Title { get; set; }

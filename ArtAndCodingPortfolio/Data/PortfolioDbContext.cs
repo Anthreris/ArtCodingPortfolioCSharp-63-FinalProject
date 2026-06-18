@@ -6,6 +6,6 @@ namespace ArtAndCodingPortfolio.Data;
 public class PortfolioDbContext : DbContext
 {
     public PortfolioDbContext(DbContextOptions<PortfolioDbContext> options) : base(options) { } 
-    public DbSet<ArtPieceModel> ArtPieces { get; set; }
+    public DbSet<ArtPiece> ArtPieces { get; set; }
     public DbSet<CodeProjectModel> CodeProjects { get; set; }
 }

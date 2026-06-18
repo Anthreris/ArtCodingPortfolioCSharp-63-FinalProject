@@ -4,9 +4,9 @@ namespace ArtAndCodingPortfolio.Data;
 
 public interface IArtRepository
 {
-    public IEnumerable<ArtPieceModel> GetAllArtPieces();
-    ArtPieceModel? GetArtPiece(int id);
-    public void InsertArtPiece(ArtPieceModel artPieceToInsert);
-    public void UpdateArtPiece(ArtPieceModel artPieceToUpdate);
-    public void DeleteArtPiece(ArtPieceModel artPieceToDelete);
+    public IEnumerable<ArtPiece> GetAllArtPieces();
+    ArtPiece? GetArtPiece(int id);
+    public void UpdateArtPiece(ArtPiece art);
+    public void InsertArtPiece(ArtPiece artPieceToInsert);
+    public void DeleteArtPiece(ArtPiece art);
 }
