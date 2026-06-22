@@ -1,6 +1,35 @@
+@model IEnumerable<ArtAndCodingPortfolio.Models.CodeProjectModel>
+
 @{
     ViewData["Title"] = "Code";
+    Layout = "_Layout";
 }
-<h1>@ViewData["Title"]</h1>
+<h2>@ViewData["Title"]</h2>
 
-<p>Code Projects.</p>
+<table class="table">
+    <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Tech Stack</th>
+        <th>GitHub</th>
+        <th>Date Added</th>
+    </tr>
+    
+    @foreach (var project in Model)
+    {
+        <tr>
+            <td>@project.Title</td>
+            <td>@project.Description</td>
+            <td>@project.TechStack</td>
+            <td>
+                @if (!string.IsNullOrEmpty(project.GitHubUrl))
+                {
+                    <a href="@project.GitHubUrl" target="_blank">view repo</a>
+                }
+            </td>
+            <td>
+                @project.DateAdded.ToShortDateString()
+            </td>
+        </tr>
+    }
+</table>

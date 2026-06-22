@@ -31,7 +31,7 @@ public class CodeController : Controller
 
     public IActionResult UpdateCodeProject(int id)
     {
-        CodeProjectModel code = _repo.GetCodeProject(id);
+        CodeProjectModel? code = _repo.GetCodeProject(id);
         if (code == null)
         {
             return View("CodeProjectNotFound");

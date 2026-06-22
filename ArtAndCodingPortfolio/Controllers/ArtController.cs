@@ -30,7 +30,7 @@ public class ArtController : Controller
     
     public IActionResult UpdateArtPiece(int id)
     {
-        ArtPiece art = _repo.GetArtPiece(id);
+        ArtPiece? art = _repo.GetArtPiece(id);
         if (art == null)
         {
             return View("ArtPieceNotFound");
@@ -47,7 +47,7 @@ public class ArtController : Controller
     public IActionResult InsertArtPiece(ArtPiece artPieceToInsert)
     {
        _repo.InsertArtPiece(artPieceToInsert);
-       return RedirectToAction("List");
+       return RedirectToAction("Index");
     }
 
     public IActionResult List()
