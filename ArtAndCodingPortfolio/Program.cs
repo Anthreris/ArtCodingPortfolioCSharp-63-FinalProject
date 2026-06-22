@@ -15,6 +15,13 @@ builder.Services.AddScoped<System.Data.IDbConnection>(_ =>
 builder.Services.AddTransient<ICodeRepository, CodeRepository>();
 builder.Services.AddTransient<IArtRepository, ArtRepository>();
 
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(60);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+
 var app = builder.Build();
 
 //Configuring the HTTP request pipeline
@@ -28,6 +35,8 @@ app.UseHttpsRedirection();
 app.UseRouting();
 
 app.UseAuthorization();
+
+app.UseSession();
 
 app.MapStaticAssets();
 
