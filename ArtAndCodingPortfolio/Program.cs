@@ -1,6 +1,4 @@
 using ArtAndCodingPortfolio.Data;
-using Microsoft.EntityFrameworkCore;
-using System.Data.Common;
 using MySqlConnector;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,11 +8,6 @@ builder.Services.AddControllersWithViews();
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
                        ?? throw new InvalidOperationException("Connection string not found");
-
-builder.Services.AddDbContext<PortfolioDbContext>(options =>
-{
-    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
-});
 
 builder.Services.AddScoped<System.Data.IDbConnection>(_ =>
     new MySqlConnection(connectionString));
