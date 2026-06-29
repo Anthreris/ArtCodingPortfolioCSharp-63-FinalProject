@@ -1,34 +1,48 @@
 using Microsoft.AspNetCore.Mvc;
 using ArtAndCodingPortfolio.Filters;
+using ArtAndCodingPortfolio.Data;
+using ArtAndCodingPortfolio.Models;
 
 namespace ArtAndCodingPortfolio.Controllers;
 
 [AdminOnly]
 public class AdminDashboardController : Controller
 {
-    
+    private readonly IArtRepository _artRepository;
+    private readonly IWebHostEnvironment _env;
+    public AdminDashboardController(IArtRepository artRepository, IWebHostEnvironment env)
+    {
+        _artRepository = artRepository;
+        _env = env;
+    }
+
     public IActionResult Index()
     {
         return View();
     }
 
-    public IActionResult AddPage()
+    [HttpGet]
+    public IActionResult AddArtPiece()
     {
-        throw new NotImplementedException();
+        return View();    
     }
 
-    public IActionResult EditPage()
+    [HttpPost]
+    public async Task<IActionResult> AddArtPiece(ArtPiece artPiece, IFormFile imageFile)
     {
-        throw new NotImplementedException();
-    }
+        if (imageFile != null && imageFile.Length > 0)
+        {
+            var fileName = Path.GetFileName(imageFile.FileName);
+            var savePath = Path.Combine(_env.WebRootPath, "ArtImages", fileName);
 
-    public IActionResult DeletePage()
-    {
-        throw new NotImplementedException();
-    }
+            using (var stream = new FileStream(savePath, FileMode.Create))
+            {
+                await imageFile.CopyToAsync(stream);
+            }
 
-    public IActionResult HidePage()
-    {
-        throw new NotImplementedException();
+            artPiece.ImagePath = $"/ArtImages/{fileName}";
+        }   
+            _artRepository.InsertArtPiece(artPiece);
+            return RedirectToAction("Index");
     }
 }

@@ -1,0 +1,26 @@
+@{
+    ViewData["Title"] = "Add Art Piece";
+}
+
+<h2>Add Art Piece</h2>
+
+<form method="post" enctype="multipart/form-data">
+    <div class="mb-3">
+        <label class="form-label">Title</label>
+        <input type="text" name="Title" class="form-control" required/>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Description</label>
+        <textarea name="description" class="form-control"></textarea>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Image</label>
+        <input type="text" name="imageFile" class="form-control" accept="image/*"/>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Sort Order</label>
+        <input type="number" name="SortOrder" class="form-control" value="0"/>
+    </div>
+    <button type="submit" class="btn btn-primary">Add Art Piece</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>
