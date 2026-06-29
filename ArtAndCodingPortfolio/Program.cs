@@ -34,9 +34,10 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseRouting();
 
+app.UseSession();
+
 app.UseAuthorization();
 
-app.UseSession();
 
 app.MapStaticAssets();
 
