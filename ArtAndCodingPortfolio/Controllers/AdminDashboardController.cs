@@ -45,4 +45,16 @@ public class AdminDashboardController : Controller
             _artRepository.InsertArtPiece(artPiece);
             return RedirectToAction("Index");
     }
+
+    // [HttpPut]
+    // public async Task<IActionResult> UpdateArtPiece(ArtPiece artPiece, IFormFile imageFile)
+    // {
+    //     if (imageFile != null && imageFile.Length > 0 )
+    //     {
+    //         var fileName = Path.GetFileName(imageFile.FileName);
+    //         var savePath = Path.Combine(_env.WebRootPath, "ArtImages", fileName);
+
+    //         using var stream = new FileStream(savePath, FileMode, Update))
+    //     }
+    // }
 }
