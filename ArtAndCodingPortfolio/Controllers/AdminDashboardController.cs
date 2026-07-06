@@ -46,7 +46,7 @@ public class AdminDashboardController : Controller
             return RedirectToAction("Index");
     }
 
-    // [HttpPut]
+    // [HttpPatch]
     // public async Task<IActionResult> UpdateArtPiece(ArtPiece artPiece, IFormFile imageFile)
     // {
     //     if (imageFile != null && imageFile.Length > 0 )
