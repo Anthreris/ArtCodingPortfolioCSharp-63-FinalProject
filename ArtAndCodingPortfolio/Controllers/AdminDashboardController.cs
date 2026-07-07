@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Mvc;
 using ArtAndCodingPortfolio.Filters;
 using ArtAndCodingPortfolio.Data;
 using ArtAndCodingPortfolio.Models;
-using System.Reflection.Metadata.Ecma335;
 
 namespace ArtAndCodingPortfolio.Controllers;
 

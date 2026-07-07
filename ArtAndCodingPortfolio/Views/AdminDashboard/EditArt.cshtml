@@ -5,8 +5,8 @@
 
 <h2>Edit Art Piece</h2>
 
-<form asp-action="Edit Art" method="post" enctype="multi-part/form-data">
-    <input type="hidden" name="ArtPieceID" value="@Model.ArtPieceID"/>
+<form asp-action="EditArt" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="artPieceID" value="@Model.ArtPieceID"/>
     <input type="hidden" name="IsHidden" value="@Model.IsHidden.ToString().ToLower()"/>
 
     <div class="mb-3">
@@ -26,7 +26,7 @@
     
     <div class="mb-3">
         <label class="form-label">Replace Image (Optional)</label>
-        <input type="file" name="ImageFile" class="form-control" accept="image/*"/>
+        <input type="file" name="imageFile" class="form-control" accept="image/*"/>
     </div>
 
     <div class="mb-3">
