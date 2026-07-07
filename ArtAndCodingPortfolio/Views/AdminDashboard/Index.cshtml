@@ -1,18 +1,61 @@
+@using ArtAndCodingPortfolio.Models
+@model IEnumerable<ArtPiece>
 @{
     ViewData["Title"] = "Admin Dashboard";
 }
 <h1>Content Managment System</h1>
 
-<h3>Manage Art Pieces</h3>
-<a asp-action="AddArtPiece" class="btn btn-primary">Add Art Piece</a>
-<br />
-<a asp-action="UpdateArtPiece" class="btn btn-secondary">Edit Art Piece</a>
-<br />
-<a asp-action="DeleteArtPiece" class="btn btn-secondary">Delete Art Piece</a>
-<br />
+<p>
+    <a asp-action="AddArtPiece" class="btn btn-primary">Add Art Piece</a>
+</p>
+
+<h3>Art Pieces</h3>
+
+@if (!Model.Any())
+{
+    <p>No Art Pieces Yet</p>
+}
+else
+{
+    <table class="table table-striped align-middle">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Sort</th>
+                <th>Hidden</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (ArtPiece piece in Model)
+            {
+                <tr>
+                    <td>@piece.Title</td>
+                    <td>@piece.SortOrder</td>
+                    <td>@(piece.IsHidden ? "Yes" : "No")</td>
+                    <td>
+                        <a asp-action="EditArt" asp-route-id="@piece.ArtPieceID" class="btn btn-sm btn-outline-primary">Edit</a>
+
+                        <a asp-action="DeleteArt" asp-rout-id="@piece.ArtPieceID" class="btn btn-sm btn-outline-danger">Delete</a>
+                        
+                        @if (piece.IsHidden)
+                        {
+                            <form asp-action="UnhideArt" asp-route-id="@piece.ArtPieceID" method="post" class="d-inline">
+                                <button type="submit" class="btn btn-sm btn-outline-secondary">Unhide</button>
+                            </form>
+                        }
+                        else
+                        {
+                            <form asp-action="HideArt" asp-route-id="@piece.ArtPieceID" method="post" class="d-inline">
+                                <button type="submit" class="btn btn-sm btn-outline-secondary">Hide</button>
+                            </form>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
 <h3>Manage Code Projects</h3>
-<a asp-action="AddCodeProject" class="btn btn-secondary">Add Code Project</a>
-<br />
-<a asp-action="EditCodeProject" class="btn btn-secondary">Edit Code Project</a>
-<br />
-<a asp-action="DeleteCodeProject" class="btn btn-secondary">Delete Code Project</a>
+<p class="text-muted">Code Project CRUD - Further Development</p>

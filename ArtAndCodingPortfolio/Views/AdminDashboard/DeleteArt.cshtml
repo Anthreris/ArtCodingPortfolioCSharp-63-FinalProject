@@ -1,0 +1,14 @@
+@model ArtAndCodingPortfolio.Models.ArtPiece
+@{
+    ViewData["Title"] = "Delete Art Piece";
+}
+
+<h2>Delete Art Piece</h2>
+
+<p>Are you sure you wish to delete <strong>@Model.Title</strong>?</p>
+
+<form asp-action="DeleteArt" method="post">
+    <input type="hidden" name="ArtPieceID" value="@Model.ArtPieceID"/>
+    <button type="submit" class="btn btn-danger">Delete Art Piece</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>
