@@ -175,4 +175,72 @@ public class AdminDashboardController : Controller
         _codeRepository.InsertCodeProject(codeProject);
         return RedirectToAction("Index");
     }
+
+    // Get/AdminDashboard/EditArt/5: Show Edit Form Pre-filled.
+    [HttpGet]
+    public IActionResult EditCode(int id)
+    {
+        CodeProject? project = _codeRepository.GetCodeProject(id);
+        if (project == null) return NotFound();
+
+        return View(project);
+    }
+    // Post/AdminDashboard/EditCode: Save Changes
+
+
+
+
+
+
+
+
+
+
+
+
+    // Get/AdminDashboard/DeleteCode/5: Confirm Delete.
+    [HttpGet]
+    public IActionResult DeleteCode(int id)
+    {
+        CodeProject? project = _codeRepository.GetCodeProject(id);
+        if (project == null) return NotFound();
+
+        return View(project);
+    }
+
+    // Post/AdminDashboard/DeleteCode: Actually Delete.
+    [HttpPost]
+    [ActionName("DeleteCode")]
+    public IActionResult DeleteCodeConfirmed(int codeProjecteID)
+    {
+        CodeProject? project = _codeRepository.GetCodeProject(codeProjecteID);
+        if (project == null) return NotFound();
+
+        _codeRepository.DeleteCodeProject(project);
+        return RedirectToAction(nameof(Index));
+    }
+
+    // Post/AdminDashbaord/HideCode/5: Soft hide from public view.
+    [HttpPost]
+    public IActionResult HideCode(int id)
+    {
+        CodeProject? project = _codeRepository.GetCodeProject(id);
+        if (project == null) return NotFound();
+
+        project.IsHidden = true;
+        _codeRepository.UpdateCodeProject(project);
+        return RedirectToAction(nameof(Index));
+    }
+
+    // Post/AdminDashboard/UnHideCode/5
+    [HttpPost]
+    public IActionResult UnhideCode(int id)
+    {
+        CodeProject? project = _codeRepository.GetCodeProject(id);
+        if (project == null) return NotFound();
+
+        project.IsHidden = false;
+        _codeRepository.UpdateCodeProject(project);
+        return RedirectToAction(nameof(Index));
+    }
 }
