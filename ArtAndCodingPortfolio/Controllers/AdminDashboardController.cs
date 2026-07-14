@@ -217,7 +217,7 @@ public class AdminDashboardController : Controller
         if (project == null) return NotFound();
 
         _codeRepository.DeleteCodeProject(project);
-        return RedirectToAction(nameof(Index));
+        return RedirectToAction(nameof(CodeIndex));
     }
 
     // Post/AdminDashbaord/HideCode/5: Soft hide from public view.
@@ -229,7 +229,7 @@ public class AdminDashboardController : Controller
 
         project.IsHidden = true;
         _codeRepository.UpdateCodeProject(project);
-        return RedirectToAction(nameof(Index));
+        return RedirectToAction(nameof(CodeIndex));
     }
 
     // Post/AdminDashboard/UnHideCode/5
@@ -241,6 +241,6 @@ public class AdminDashboardController : Controller
 
         project.IsHidden = false;
         _codeRepository.UpdateCodeProject(project);
-        return RedirectToAction(nameof(Index));
+        return RedirectToAction(nameof(CodeIndex));
     }
 }
