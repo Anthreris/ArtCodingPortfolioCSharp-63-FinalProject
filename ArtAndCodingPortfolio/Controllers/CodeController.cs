@@ -31,7 +31,7 @@ public class CodeController : Controller
 
     public IActionResult UpdateCodeProject(int id)
     {
-        CodeProjectModel? code = _repo.GetCodeProject(id);
+        CodeProject? code = _repo.GetCodeProject(id);
         if (code == null)
         {
             return View("CodeProjectNotFound");
@@ -39,7 +39,7 @@ public class CodeController : Controller
         return View(code);
     }
 
-    public IActionResult UpdateCodeProjectToDatabase(CodeProjectModel codeProjectToUpdate)
+    public IActionResult UpdateCodeProjectToDatabase(CodeProject codeProjectToUpdate)
     {
         _repo.UpdateCodeProject(codeProjectToUpdate);
         return RedirectToAction("ViewCode", new { id = codeProjectToUpdate.CodeProjectID });
@@ -51,7 +51,7 @@ public class CodeController : Controller
     //     return View(code);
     // }
 
-    public IActionResult DeleteCodeProject(CodeProjectModel code)
+    public IActionResult DeleteCodeProject(CodeProject code)
     {
         _repo.DeleteCodeProject(code);
         return RedirectToAction("Index");

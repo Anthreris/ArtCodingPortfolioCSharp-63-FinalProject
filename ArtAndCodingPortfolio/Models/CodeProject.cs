@@ -1,6 +1,6 @@
 namespace ArtAndCodingPortfolio.Models;
 
-public class CodeProjectModel
+public class CodeProject
 {
     public int CodeProjectID  { get; set; }
     public required string Title  { get; set; }

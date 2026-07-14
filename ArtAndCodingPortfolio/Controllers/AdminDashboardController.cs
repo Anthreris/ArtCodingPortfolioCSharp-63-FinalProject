@@ -9,10 +9,12 @@ namespace ArtAndCodingPortfolio.Controllers;
 public class AdminDashboardController : Controller
 {
     private readonly IArtRepository _artRepository;
+    private readonly ICodeRepository _codeRepository;
     private readonly IWebHostEnvironment _env;
-    public AdminDashboardController(IArtRepository artRepository, IWebHostEnvironment env)
+    public AdminDashboardController(IArtRepository artRepository, ICodeRepository codeRepository, IWebHostEnvironment env)
     {
         _artRepository = artRepository;
+        _codeRepository = codeRepository;
         _env = env;
     }
 
@@ -132,5 +134,45 @@ public class AdminDashboardController : Controller
         piece.IsHidden = false;
         _artRepository.UpdateArtPiece(piece);
         return RedirectToAction(nameof(Index));
+    }
+
+
+
+
+    //Code Repository Injection
+
+    public IActionResult CodeIndex()
+    {
+        IEnumerable<CodeProject> code = _codeRepository.GetAllCodeProjectsForAdmin();
+        return View(code);
+    }
+
+    [HttpGet]
+    public IActionResult AddCodeProject()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> AddCodeProject(CodeProject codeProject, IFormFile gitHubUrl)
+    {
+        if (gitHubUrl == null || gitHubUrl.Length == 0)
+        {
+            ModelState.AddModelError(string.Empty, "GitHubUrl Required");
+            return View(codeProject);
+        }
+        string fileName = Path.GetFileName(gitHubUrl.FileName);
+        string savePath = Path.Combine(_env.WebRootPath, "GitHubUrl", fileName);
+
+        using (FileStream stream = new FileStream(savePath, FileMode.Create))
+        {
+            await gitHubUrl.CopyToAsync(stream);
+        }
+
+        codeProject.TechStack = $"/GitHubUrl/{fileName}";
+        codeProject.DateAdded = DateTime.Now;
+          
+        _codeRepository.InsertCodeProject(codeProject);
+        return RedirectToAction("Index");
     }
 }

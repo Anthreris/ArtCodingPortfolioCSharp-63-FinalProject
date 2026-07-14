@@ -23,18 +23,23 @@
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-controller="Home" asp-action="Index">Home</a>
                     </li>
+
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-controller="Art" asp-action="Index">Art</a>
                     </li>
+
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-controller="Code" asp-action="Index">Code</a>
                     </li>
+
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-controller="Contact" asp-action="Index">Contact</a>
                     </li>
+
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-controller="Privacy" asp-action="Index">Privacy</a>
                     </li>
+
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-controller="UserAgreement" asp-action="Index">User Agreement</a>
                     </li>
@@ -42,8 +47,13 @@
                 <ul class="navbar-nav">
                     @if (Context.Session.GetString("IsAdmin") == "true"){
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="AdminDashboard" asp-action="Index">Admin</a>
+                            <a class="nav-link text-dark" asp-controller="AdminDashboard" asp-action="Index">ArtAdmin</a>
                         </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="AdminDashboard" asp-action="CodeIndex">CodeAdmin</a>
+                        </li>
+
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-controller="Account" asp-action="Logout">Logout</a>
                         </li>

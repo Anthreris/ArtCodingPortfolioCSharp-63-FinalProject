@@ -1,4 +1,4 @@
-@model IEnumerable<ArtAndCodingPortfolio.Models.CodeProjectModel>
+@model IEnumerable<ArtAndCodingPortfolio.Models.CodeProject>
 
 @{
     ViewData["Title"] = "Code";
@@ -15,7 +15,7 @@
         <th>Date Added</th>
     </tr>
     
-    @foreach (var project in Model)
+    @foreach (CodeProject project in Model)
     {
         <tr>
             <td>@project.Title</td>

@@ -1,0 +1,14 @@
+@model ArtAndCodingPortfolio.Models.CodeProject
+@{
+    ViewData["Title"] = "Delete Code Project";
+}
+
+<h2>Delete Code Project</h2>
+
+<p>Are you sure you wish to delete <strong>@Model.Title</strong>?</p>
+
+<form asp-action="DeleteCode" method="post">
+    <input type="hidden" name="codeProjectID" value="@Model.CodeProjectID"/>
+    <button type="submit" class="btn btn-danger">Delete Code Project</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>

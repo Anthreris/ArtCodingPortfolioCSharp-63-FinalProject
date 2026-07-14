@@ -1,14 +1,14 @@
 @using ArtAndCodingPortfolio.Models
-@model IEnumerable<ArtPiece>
+@model IEnumerable<CodeProject>
 @{
     ViewData["Title"] = "Admin Dashboard";
 }
 
-<h3>Art Pieces <a asp-action="AddArtPiece" class="btn btn-primary">Add Art Piece</a></h3> 
+<h3>Code Projects <a asp-action="AddCodeProject" class="btn btn-primary">Add Code Project</a></h3>
 
 @if (!Model.Any())
 {
-    <p>No Art Pieces Yet</p>
+    <p>No Code Projects Yet</p>
 }
 else
 {
@@ -22,26 +22,26 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (ArtPiece piece in Model)
+            @foreach (CodeProject project in Model)
             {
                 <tr>
-                    <td>@piece.Title</td>
-                    <td>@piece.SortOrder</td>
-                    <td>@(piece.IsHidden ? "Yes" : "No")</td>
+                    <td>@project.Title</td>
+                    <td>@project.SortOrder</td>
+                    <td>@(project.IsHidden ? "Yes" : "No")</td>
                     <td>
-                        <a asp-action="EditArt" asp-route-id="@piece.ArtPieceID" class="btn btn-sm btn-outline-primary">Edit</a>
+                        <a asp-action="EditCode" asp-route-id="@project.CodeProjectID" class="btn btn-sm btn-outline-primary">Edit</a>
 
-                        <a asp-action="DeleteArt" asp-route-id="@piece.ArtPieceID" class="btn btn-sm btn-outline-danger">Delete</a>
+                        <a asp-action="DeleteCode" asp-route-id="@project.CodeProjectID" class="btn btn-sm btn-outline-danger">Delete</a>
                         
-                        @if (piece.IsHidden)
+                        @if (project.IsHidden)
                         {
-                            <form asp-action="UnhideArt" asp-route-id="@piece.ArtPieceID" method="post" class="d-inline">
+                            <form asp-action="UnhideCode" asp-route-id="@project.CodeProjectID" method="post" class="d-inline">
                                 <button type="submit" class="btn btn-sm btn-outline-secondary">Unhide</button>
                             </form>
                         }
                         else
                         {
-                            <form asp-action="HideArt" asp-route-id="@piece.ArtPieceID" method="post" class="d-inline">
+                            <form asp-action="HideCode" asp-route-id="@project.CodeProjectID" method="post" class="d-inline">
                                 <button type="submit" class="btn btn-sm btn-outline-secondary">Hide</button>
                             </form>
                         }
