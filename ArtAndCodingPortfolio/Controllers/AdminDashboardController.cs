@@ -52,6 +52,7 @@ public class AdminDashboardController : Controller
         _artRepository.InsertArtPiece(artPiece);
         return RedirectToAction("Index");
     }
+    
     // Get/AdminDashboard/EditArt/5: Show Edit Form Pre-filled.
     [HttpGet]
     public IActionResult EditArt(int id)
@@ -61,6 +62,7 @@ public class AdminDashboardController : Controller
 
         return View(piece);
     }
+
     // Post/AdminDashboard/EditArt: Save Changes
     [HttpPost]
     public async Task<IActionResult> EditArt(ArtPiece artPiece, IFormFile? imageFile)
@@ -138,7 +140,6 @@ public class AdminDashboardController : Controller
 
 
 
-
     //Code Repository Injection
 
     public IActionResult CodeIndex()
@@ -154,26 +155,19 @@ public class AdminDashboardController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> AddCodeProject(CodeProject codeProject, IFormFile gitHubUrl)
+    public async Task<IActionResult> AddCodeProject(CodeProject codeProject, string gitHubUrl)
     {
-        if (gitHubUrl == null || gitHubUrl.Length == 0)
+        if (string.IsNullOrEmpty(gitHubUrl))
         {
-            ModelState.AddModelError(string.Empty, "GitHubUrl Required");
+            ModelState.AddModelError(string.Empty, "GitHub Url Required");
             return View(codeProject);
         }
-        string fileName = Path.GetFileName(gitHubUrl.FileName);
-        string savePath = Path.Combine(_env.WebRootPath, "GitHubUrl", fileName);
 
-        using (FileStream stream = new FileStream(savePath, FileMode.Create))
-        {
-            await gitHubUrl.CopyToAsync(stream);
-        }
-
-        codeProject.TechStack = $"/GitHubUrl/{fileName}";
+        codeProject.GitHubUrl = gitHubUrl;
         codeProject.DateAdded = DateTime.Now;
           
         _codeRepository.InsertCodeProject(codeProject);
-        return RedirectToAction("Index");
+        return RedirectToAction("CodeIndex");
     }
 
     // Get/AdminDashboard/EditArt/5: Show Edit Form Pre-filled.
@@ -185,18 +179,25 @@ public class AdminDashboardController : Controller
 
         return View(project);
     }
+    
     // Post/AdminDashboard/EditCode: Save Changes
+    [HttpPost]
+    public async Task<IActionResult> EditCode(CodeProject codeProject, string? gitHubUrl)
+    {
+        CodeProject? existing = _codeRepository.GetCodeProject(codeProject.CodeProjectID);
+        if (existing == null) return NotFound();
 
+        if (!string.IsNullOrEmpty(gitHubUrl))
+        {
+            ModelState.AddModelError(string.Empty, "GitHub Url Required");
+            codeProject.GitHubUrl = gitHubUrl;
+        }
+        codeProject.TechStack ??= existing.TechStack;
+        codeProject.GitHubUrl ??= existing.GitHubUrl;
 
-
-
-
-
-
-
-
-
-
+        _codeRepository.UpdateCodeProject(codeProject);
+        return RedirectToAction("CodeIndex");
+    }
 
     // Get/AdminDashboard/DeleteCode/5: Confirm Delete.
     [HttpGet]
@@ -211,13 +212,13 @@ public class AdminDashboardController : Controller
     // Post/AdminDashboard/DeleteCode: Actually Delete.
     [HttpPost]
     [ActionName("DeleteCode")]
-    public IActionResult DeleteCodeConfirmed(int codeProjecteID)
+    public IActionResult DeleteCodeConfirmed(int codeProjectID)
     {
-        CodeProject? project = _codeRepository.GetCodeProject(codeProjecteID);
+        CodeProject? project = _codeRepository.GetCodeProject(codeProjectID);
         if (project == null) return NotFound();
 
         _codeRepository.DeleteCodeProject(project);
-        return RedirectToAction(nameof(CodeIndex));
+        return RedirectToAction("CodeIndex");
     }
 
     // Post/AdminDashbaord/HideCode/5: Soft hide from public view.
@@ -229,7 +230,7 @@ public class AdminDashboardController : Controller
 
         project.IsHidden = true;
         _codeRepository.UpdateCodeProject(project);
-        return RedirectToAction(nameof(CodeIndex));
+        return RedirectToAction("CodeIndex");
     }
 
     // Post/AdminDashboard/UnHideCode/5
@@ -241,6 +242,6 @@ public class AdminDashboardController : Controller
 
         project.IsHidden = false;
         _codeRepository.UpdateCodeProject(project);
-        return RedirectToAction(nameof(CodeIndex));
+        return RedirectToAction("CodeIndex");
     }
 }
