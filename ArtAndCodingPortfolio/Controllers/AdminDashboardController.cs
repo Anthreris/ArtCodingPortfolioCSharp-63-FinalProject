@@ -155,7 +155,7 @@ public class AdminDashboardController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> AddCodeProject(CodeProject codeProject, string gitHubUrl)
+    public IActionResult AddCodeProject(CodeProject codeProject, string gitHubUrl)
     {
         if (string.IsNullOrEmpty(gitHubUrl))
         {
@@ -182,7 +182,7 @@ public class AdminDashboardController : Controller
     
     // Post/AdminDashboard/EditCode: Save Changes
     [HttpPost]
-    public async Task<IActionResult> EditCode(CodeProject codeProject, string? gitHubUrl)
+    public IActionResult EditCode(CodeProject codeProject, string? gitHubUrl)
     {
         CodeProject? existing = _codeRepository.GetCodeProject(codeProject.CodeProjectID);
         if (existing == null) return NotFound();
