@@ -3,7 +3,7 @@ html {
 }
 
 .navbar {
-  background-color: #f95959 !important;
+  background: linear-gradient(135deg,#f95959, #e63946, #8b0000) !important;
   border-bottom: 5px solid #00bbf0 !important;
 }
 
@@ -28,7 +28,10 @@ html {
 
 body {
   margin-bottom: 60px;
-  background-color: #c4c4c4 ;
+  background: 
+  linear-gradient(180deg, rgba(196,196,196,0.4) 0%, rgba(196,196,196,0) 40%, rgba(180,180,180,0.3) 60%, rgba(160,160,160,0.5) 100%),
+  linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0) 50%, rgba(0,0,0,0.05) 100%),
+  linear-gradient(135deg, #c4c4c4, #b0b0b0, #a0a0a0);
 }
 
 .form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
